@@ -18,13 +18,17 @@ This project focuses on analyzing and visualizing the Facility-Level Minimum Dat
 * **Data Storage**: SQL (via SQLAlchemy) or MongoDB (via PyMongo)
 * **ML/Stats**: Scikit-learn, SHAP, Matplotlib/Seaborn
 * **Visualization**: Power BI
-* **Environment**: Jupyter, VS Code, GitHub
+* **Environment**: Jupyter Notebook, GitHub, REST API
 
 ## Project Structure
 
 ```
-├── data/                    # Cleaned data samples or schema
-├── scripts/                 # Python scripts for data cleaning, modeling, 
+├── data/                    # Sample subset of MDS data
+├── notebooks/               # Jupyter Notebooks for EDA and cleaning
+│   └── 01_data_cleaning.ipynb
+├── scripts/                 # Python scripts for data handling
+│   ├── fetch_data.py        # Script to load data from API
+│   └── clean_utils.py       # Cleaning functions to import into notebooks
 ├── models/                  # Trained models, SHAP outputs
 ├── powerbi/                 # .pbix file or dashboard description
 ├── requirements.txt         # Dependencies
@@ -34,7 +38,8 @@ This project focuses on analyzing and visualizing the Facility-Level Minimum Dat
 
 ## Data Source
 
-**Source**: [CMS.gov Facility-Level Minimum Data Set Frequency](https://data.cms.gov/quality-of-care/facility-level-minimum-data-set-frequency)
+**Source**: [CMS.gov Facility-Level Minimum Data Set Frequency](https://data.cms.gov/provider-data/dataset/4pq5-n9py)
+**API Endpoint**: [CMS Data API](https://data.cms.gov/data-api/v1/dataset/d086edc0-4953-4fb9-a663-b35526371add/data)
 
 This dataset includes:
 
@@ -43,7 +48,7 @@ This dataset includes:
 * Medications and treatments
 * Functional and behavioral metrics
 
-Due to its size, the dataset is best processed using statistical software or a database.
+The project will use the API for live data ingestion and a small static CSV subset as a fallback or for development purposes.
 
 ## Workflow Summary
 
@@ -51,14 +56,13 @@ Due to its size, the dataset is best processed using statistical software or a d
 2. **Clean & Transform**: Handle missing values, encode categorical variables, standardize scales.
 3. **Modeling**:
 
-   * Cluster residents by health/function profiles.
-   * Predict likelihood of outcomes (e.g., readmission).
+   * Cluster residents or predict risk factors.
    * Use SHAP for interpretability.
+   * Store outputs for use in Power BI.
 4. **Power BI Dashboard**:
 
-   * Import cleaned/aggregated dataset.
-   * Design visuals for clarity and interactivity.
-   * Share or export as .pbix.
+   * Import aggregated and modeled data.
+   * Design a dashboard with interactivity and clarity in mind.
 
 ## Dashboard Preview
 
@@ -74,7 +78,7 @@ Key components:
 
 ```bash
 # Clone the repository
-$ git clone https://github.com/JosephChege4/nursing-facility-analytics.git
+$ git clone https://github.com/your-username/nursing-facility-analytics.git
 $ cd nursing-facility-analytics
 
 # Create a virtual environment
@@ -84,8 +88,8 @@ $ source venv/bin/activate  # or venv\Scripts\activate on Windows
 # Install dependencies
 $ pip install -r requirements.txt
 
-# Run initial ETL script
-$ python scripts/clean_data.py
+# Fetch initial data from CMS API
+$ python scripts/fetch_data.py
 ```
 
 ## Future Work
@@ -106,6 +110,6 @@ Contributions are welcome! Please fork the repo and submit a pull request. For m
 
 ## Author
 
-**\[Your Full Name]**
+**\[Joseph Chege Mungai]**
 Recent NYU Graduate | Math & CS | Python & Data Science Enthusiast
 GitHub: [@JosephChege4](https://github.com/JosephChege4)
