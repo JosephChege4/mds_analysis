@@ -66,7 +66,7 @@ The project will use the API for live data ingestion and a small static CSV subs
 
 ## Dashboard Preview
 
-> \[Include a screenshot here of the Power BI dashboard once available. You can upload it to GitHub and link it using markdown.]
+> \[I will include a screenshot here of the Power BI dashboard once available. It will be uploaded to GitHub and linked using markdown.]
 
 Key components:
 
