@@ -27,6 +27,7 @@ This project focuses on analyzing and visualizing the Facility-Level Minimum Dat
 ├── notebooks/               # Jupyter Notebooks for EDA and cleaning
 │   └── 01_data_cleaning.ipynb
 ├── scripts/                 # Python scripts for data handling
+│   ├── __init__.py          # Centralizes imports
 │   ├── fetch_data.py        # Script to load data from API
 │   └── clean_utils.py       # Cleaning functions to import into notebooks
 ├── models/                  # Trained models, SHAP outputs
@@ -39,6 +40,7 @@ This project focuses on analyzing and visualizing the Facility-Level Minimum Dat
 ## Data Source
 
 **Source**: [CMS.gov Facility-Level Minimum Data Set Frequency](https://data.cms.gov/provider-data/dataset/4pq5-n9py)
+
 **API Endpoint**: [CMS Data API](https://data.cms.gov/data-api/v1/dataset/d086edc0-4953-4fb9-a663-b35526371add/data)
 
 This dataset includes:
