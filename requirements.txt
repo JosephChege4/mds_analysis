@@ -14,9 +14,7 @@ seaborn
 pandas
 jupyter
 
-# Kaggle
-kagglehub
-
 # Other
 pyod
 pymongo
+requests
