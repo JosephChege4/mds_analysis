@@ -1,0 +1,22 @@
+# Environment variable loading
+python-dotenv
+
+# Jupyter
+jupyterlab
+notebook
+nest-asyncio
+matplotlib
+httpx
+numpy
+scikit-learn
+matplotlib
+seaborn
+pandas
+jupyter
+
+# Kaggle
+kagglehub
+
+# Other
+pyod
+pymongo
