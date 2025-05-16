@@ -30,7 +30,7 @@ This project focuses on analyzing and visualizing the Facility-Level Minimum Dat
 │   ├── fetch_data.py        # Script to load data from API
 │   └── clean_utils.py       # Cleaning functions to import into notebooks
 ├── models/                  # Trained models, SHAP outputs
-├── powerbi/                 # .pbix file or dashboard description
+├── dashboards/                 # .pbix file or dashboard description
 ├── requirements.txt         # Dependencies
 ├── README.md                # This file
 └── LICENSE                  # GNU GPL v3 License
