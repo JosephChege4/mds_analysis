@@ -112,6 +112,8 @@ Contributions are welcome! Please fork the repo and submit a pull request. For m
 
 ## Author
 
-**\[Joseph Chege Mungai]**
+**Joseph Chege Mungai**
+
 Recent NYU Graduate | Math & CS | Python & Data Science Enthusiast
+
 GitHub: [@JosephChege4](https://github.com/JosephChege4)
