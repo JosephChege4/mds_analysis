@@ -66,7 +66,7 @@ The project will use the API for live data ingestion and a small static CSV subs
 
 ## Dashboard Preview
 
-> \[I will include a screenshot here of the Power BI dashboard once available. It will be uploaded to GitHub and linked using markdown.]
+> \[I will include a screenshot here of the Power BI dashboard once it is available. It will be uploaded to GitHub and linked using markdown.]
 
 Key components:
 
@@ -78,7 +78,7 @@ Key components:
 
 ```bash
 # Clone the repository
-$ git clone https://github.com/your-username/nursing-facility-analytics.git
+$ git clone https://github.com/JosephChege4/nursing-facility-analytics.git
 $ cd nursing-facility-analytics
 
 # Create a virtual environment
