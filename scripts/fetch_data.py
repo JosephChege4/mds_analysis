@@ -5,10 +5,6 @@ import os
 from typing import Dict, Optional
 from datetime import datetime
 
-# Directory setup
-RAW_DATA_DIR = "data/raw"
-os.makedirs(RAW_DATA_DIR, exist_ok=True)
-
 # CMS API endpoints
 DATASETS: Dict[str, str] = {
     # Final 2 JSON-only datasets
@@ -68,7 +64,7 @@ def fetch_cms_data(api_url: str, limit: int = 5000, max_records=5000) -> pd.Data
     return pd.DataFrame(all_data)
 
 
-def save_dataset(name: str, df: pd.DataFrame, subfolder: Optional[str] = None):
+def save_dataset(name: str, df: pd.DataFrame, subfolder: str = "data/raw"):
     """
     Saves a DataFrame as a CSV file to either 'data/raw' or custom location.
 
@@ -77,8 +73,6 @@ def save_dataset(name: str, df: pd.DataFrame, subfolder: Optional[str] = None):
         df (pd.DataFrame): Data to write.
         subfolder (str): Folder to save into.
     """
-    if subfolder is None:
-        subfolder = RAW_DATA_DIR
     os.makedirs(subfolder, exist_ok=True)
     filepath = os.path.join(subfolder, f"{name}.csv")
     df.to_csv(filepath, index=False)
@@ -93,8 +87,8 @@ if __name__ == "__main__":
             print(f"\nFetching dataset: {name}")
             df = fetch_cms_data(url)
             save_dataset(name, df)
-            time.sleep(2)
+            time.sleep(2)  # Avoid hammering CMS servers
         except Exception as e:
             print(f"Error fetching '{name}': {e}")
 
-    print(f"\n[{datetime.now()}] Fetch complete.")
+    print(f"\n[{datetime.now()}] All fetches complete.")
