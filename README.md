@@ -1,119 +1,205 @@
-# Predictive Analytics & Dashboarding for Skilled Nursing Facility Residents
+# 🏥 Nursing Facility Risk Assessment & Quality Dashboard
 
 ## Overview
 
-This project focuses on analyzing and visualizing the Facility-Level Minimum Data Set (MDS) data provided by CMS to identify resident-level trends, risk profiles, and key insights across skilled nursing facilities. The goal is to build a robust data pipeline, predictive modeling layer, and an interactive Power BI dashboard to support healthcare compliance analytics.
+This project builds an end-to-end data analytics pipeline to assess and visualize nursing home performance in the U.S. using publicly available datasets from CMS (Centers for Medicare & Medicaid Services). By analyzing staffing, penalties, quality scores, and citations, this system aims to proactively identify high-risk facilities—empowering nursing home staff and owners to improve care, reduce penalties, and prevent compliance violations.
 
-## Project Objectives
+---
 
-* Preprocess and clean high-volume MDS healthcare data.
-* Engineer features from cognitive, health, and functional metrics.
-* Train interpretable machine learning models to cluster residents or predict risks.
-* Develop a clear and functional Power BI dashboard to showcase insights.
-* Provide extensible, production-ready code in Python and SQL.
+## 🎯 Project Objectives
 
-## Tech Stack
+* Ingest and clean a variety of CMS datasets using their APIs.
+* Analyze relationships between staffing, quality measures, survey citations, and financial penalties.
+* Build interpretable ML models to predict:
 
-* **Programming**: Python (Pandas, Numpy, Scikit-learn)
-* **Data Storage**: SQL (via SQLAlchemy) or MongoDB (via PyMongo)
-* **ML/Stats**: Scikit-learn, SHAP, Matplotlib/Seaborn
-* **Visualization**: Power BI
-* **Environment**: Jupyter Notebook, GitHub, REST API
+  * Risk of receiving penalties or fines
+  * Poor performance on quality measures
+* Visualize key insights through a Power BI dashboard to:
 
-## Project Structure
+  * Support healthcare compliance strategy
+  * Enable better decision-making for nursing home stakeholders
+
+---
+
+## 🧰 Tech Stack
+
+### Programming & Analysis
+
+* Python (Data Cleaning, API Calls, ML)
+* SQL (via SQLAlchemy or pandas for in-memory operations)
+* Power BI (for visualization)
+* Jupyter Notebooks (for prototyping and EDA)
+
+### Key Libraries
+
+* `pandas`, `numpy`, `scikit-learn`, `matplotlib`, `seaborn`
+* `requests`, `json` (for CMS API access)
+* `shap`, `joblib` (for model interpretation and storage)
+* `PyMongo` (optional for storing cleaned datasets)
+
+---
+
+## 📁 Project Structure
 
 ```
-├── data/                    # Sample subset of MDS data
+nursing-facility-analytics/
+├── data/                    # Sample subset of data
 ├── notebooks/               # Jupyter Notebooks for EDA and cleaning
 │   └── 01_data_cleaning.ipynb
 ├── scripts/                 # Python scripts for data handling
-│   ├── __init__.py          # Centralizes imports
-│   ├── fetch_data.py        # Script to load data from API
-│   └── clean_utils.py       # Cleaning functions to import into notebooks
-├── models/                  # Trained models, SHAP outputs
-├── dashboards/                 # .pbix file or dashboard description
+│   ├── __init__.py
+│   ├── fetch_data.py        # API-based data fetch and storage
+│   └── clean_utils.py       # Custom data cleaning functions
+├── models/                  # Trained models and SHAP explainability outputs
+├── dashboards/              # Power BI dashboard (.pbix) and/or description
 ├── requirements.txt         # Dependencies
-├── README.md                # This file
+├── README.md                # Project overview
 └── LICENSE                  # GNU GPL v3 License
 ```
 
-## Data Source
+---
 
-**Source**: [CMS.gov Facility-Level Minimum Data Set Frequency](https://data.cms.gov/provider-data/dataset/4pq5-n9py)
+## 🗂️ Data Sources and API Endpoints
 
-**API Endpoint**: [CMS Data API](https://data.cms.gov/data-api/v1/dataset/d086edc0-4953-4fb9-a663-b35526371add/data)
+CMS APIs are accessed in JSON format using `GET /provider-data/api/1/datastore/query/{distributionId}`. Two additional datasets use dedicated JSON endpoints. This design enables consistent data ingestion across all sources.
 
-This dataset includes:
+### ✅ Datasets Used (19 Total)
 
-* Resident characteristics (age, race, marital status)
-* Health indicators (diagnoses, cognitive/mood status)
-* Medications and treatments
-* Functional and behavioral metrics
+From [CMS Nursing Homes Portal](https://data.cms.gov/provider-data/topics/nursing-homes):
 
-The project will use the API for live data ingestion and a small static CSV subset as a fallback or for development purposes.
+1. **Provider Information**
+2. **MDS Quality Measures**
+3. **Penalties**
+4. **State-Level Health Inspection Cut Points**
+5. **Fire Safety Deficiencies**
+6. **Medicare Claims Quality Measures**
+7. **Inspection Dates**
+8. **Survey Summary**
+9. **State US Averages**
+10. **Ownership**
+11. **FY 2025 SNF VBP Facility-Level Dataset**
+12. **FY 2025 SNF VBP Aggregate Performance**
+13. **Health Deficiencies**
+14. **Nursing Home Data Collection Intervals**
+15. **Skilled Nursing Facility Quality Reporting Program - National Data**
+16. **Skilled Nursing Facility QRP - Swing Beds - Provider Data**
+17. **Skilled Nursing Facility QRP - Provider Data**
 
-## Workflow Summary
+From [CMS Quality of Care Portal](https://data.cms.gov/quality-of-care):
 
-1. **Ingest Data**: Load raw CSV into a Pandas DataFrame or SQL database.
-2. **Clean & Transform**: Handle missing values, encode categorical variables, standardize scales.
-3. **Modeling**:
+18. [Facility-Level Minimum Data Set Frequency](https://data.cms.gov/data-api/v1/dataset/d086edc0-4953-4fb9-a663-b35526371add/data)
+19. [Minimum Data Set Frequency](https://data.cms.gov/data-api/v1/dataset/4b50bbe6-a496-4eda-b03b-5f835937f81b/data)
 
-   * Cluster residents or predict risk factors.
-   * Use SHAP for interpretability.
-   * Store outputs for use in Power BI.
-4. **Power BI Dashboard**:
+---
 
-   * Import aggregated and modeled data.
-   * Design a dashboard with interactivity and clarity in mind.
+## 🔁 Workflow Summary
 
-## Dashboard Preview
+1. **Data Ingestion**
 
-> \[I will include a screenshot here of the Power BI dashboard once it is available. It will be uploaded to GitHub and linked using markdown.]
+   * Retrieve JSON data via CMS API endpoints
+   * Store snapshots in `data/` or persist in `MongoDB` (optional)
 
-Key components:
+2. **Cleaning & Standardization**
 
-* Resident risk profile summary
-* Facility-level filtering
-* Interactive drill-down by age group, diagnosis, etc.
+   * Normalize column names, parse dates, fill missing values
+   * Join on `provider_id`, `federal_provider_number`, or similar keys
 
-## Setup Instructions
+3. **Feature Engineering**
 
-```bash
-# Clone the repository
-$ git clone https://github.com/JosephChege4/nursing-facility-analytics.git
-$ cd nursing-facility-analytics
+   * Construct:
 
-# Create a virtual environment
-$ python -m venv venv
-$ source venv/bin/activate  # or venv\Scripts\activate on Windows
+     * Staff-to-resident ratios
+     * Penalty rate metrics
+     * Quality measure aggregates
+     * Rolling scores and state comparisons
 
-# Install dependencies
-$ pip install -r requirements.txt
+4. **Exploratory Data Analysis**
 
-# Fetch initial data from CMS API
-$ python scripts/fetch_data.py
-```
+   * Identify trends, correlations, and outliers
+   * Visualize state-by-state or ownership-type breakdowns
 
-## Future Work
+5. **Modeling & Risk Prediction**
 
-* Integrate time series modeling for resident trends.
-* Build a REST API for querying ML results.
-* Use LLMs to auto-generate patient summaries.
-* Automate dashboard refresh with live data.
-* Add HIPAA-safe data simulation tools for demonstration purposes.
+   * Classify facilities as “at-risk” based on citations or fines
+   * Use SHAP to interpret model predictions
 
-## License
+6. **Dashboarding (Power BI)**
 
-This project is licensed under the **GNU General Public License v3.0**. See the `LICENSE` file for details.
+   * Dynamic filters (state, ownership, year)
+   * Drill-down by facility
+   * KPIs, risk heatmaps, penalty timelines
 
-## Contributing
+---
 
-Contributions are welcome! Please fork the repo and submit a pull request. For major changes, open an issue first to discuss what you'd like to change.
+## 📊 Dashboard Preview
 
-## Author
+> *Coming soon* — a snapshot of the interactive Power BI dashboard will be included.
 
-**Joseph Chege Mungai**
+Expected sections:
 
-Recent NYU Graduate | Math & CS | Python & Data Science Enthusiast
+* Risk Indicator Map
+* Staffing vs Quality Bubble Chart
+* Quality Score Trends
+* Facility Scorecards
 
+---
+
+## ⚙️ Setup Instructions
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/JosephChege4/nursing-facility-analytics.git
+   cd nursing-facility-analytics
+   ```
+
+2. Create a virtual environment:
+
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. (Optional) Run data ingestion:
+
+   ```bash
+   python scripts/fetch_data.py
+   ```
+
+5. Open and run notebooks for cleaning and EDA.
+
+---
+
+## 🚀 Future Work
+
+* Integrate with **Flask/FastAPI** to deploy a facility lookup web tool.
+* Add **LLM-based querying** for natural language analysis.
+* Extend to real-time dashboards with APIs or direct facility reporting.
+* Benchmark facility performance against national/state standards.
+
+---
+
+## 📜 License
+
+Distributed under the [GNU General Public License v3.0](LICENSE).
+
+---
+
+## 🤝 Contributing
+
+Feel free to fork this repository, open issues, or submit pull requests for improvements.
+
+---
+
+## 👤 Author
+
+**Joseph Chege Munga**
+Math & CS Graduate | Python, ML, Data Science
 GitHub: [@JosephChege4](https://github.com/JosephChege4)
+Email: [chegejrmungai@gmail.com](mailto:chegejrmungai@gmail.com)
