@@ -6,7 +6,7 @@ This project builds an end-to-end data analytics pipeline to assess and visualiz
 
 ---
 
-## 🎯 Project Objectives
+## Project Objectives
 
 * Ingest and clean a variety of CMS datasets using their APIs.
 * Analyze relationships between staffing, quality measures, survey citations, and financial penalties.
@@ -21,7 +21,7 @@ This project builds an end-to-end data analytics pipeline to assess and visualiz
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
 ### Programming & Analysis
 
@@ -59,11 +59,11 @@ nursing-facility-analytics/
 
 ---
 
-## 🗂️ Data Sources and API Endpoints
+## Data Sources and API Endpoints
 
 CMS APIs are accessed in JSON format using `GET /provider-data/api/1/datastore/query/{distributionId}`. Two additional datasets use dedicated JSON endpoints. This design enables consistent data ingestion across all sources.
 
-### ✅ Datasets Used (19 Total)
+### Datasets Used (19 Total)
 
 From [CMS Nursing Homes Portal](https://data.cms.gov/provider-data/topics/nursing-homes):
 
@@ -87,12 +87,12 @@ From [CMS Nursing Homes Portal](https://data.cms.gov/provider-data/topics/nursin
 
 From [CMS Quality of Care Portal](https://data.cms.gov/quality-of-care):
 
-18. [Facility-Level Minimum Data Set Frequency](https://data.cms.gov/data-api/v1/dataset/d086edc0-4953-4fb9-a663-b35526371add/data)
-19. [Minimum Data Set Frequency](https://data.cms.gov/data-api/v1/dataset/4b50bbe6-a496-4eda-b03b-5f835937f81b/data)
+18. **Facility-Level Minimum Data Set Frequency**
+19. **Minimum Data Set Frequency**
 
 ---
 
-## 🔁 Workflow Summary
+## Workflow Summary
 
 1. **Data Ingestion**
 
@@ -131,7 +131,7 @@ From [CMS Quality of Care Portal](https://data.cms.gov/quality-of-care):
 
 ---
 
-## 📊 Dashboard Preview
+## Dashboard Preview
 
 > *Coming soon* — a snapshot of the interactive Power BI dashboard will be included.
 
@@ -144,7 +144,7 @@ Expected sections:
 
 ---
 
-## ⚙️ Setup Instructions
+## Setup Instructions
 
 1. Clone the repository:
 
@@ -176,7 +176,7 @@ Expected sections:
 
 ---
 
-## 🚀 Future Work
+## Future Work
 
 * Integrate with **Flask/FastAPI** to deploy a facility lookup web tool.
 * Add **LLM-based querying** for natural language analysis.
@@ -185,21 +185,24 @@ Expected sections:
 
 ---
 
-## 📜 License
+## License
 
 Distributed under the [GNU General Public License v3.0](LICENSE).
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Feel free to fork this repository, open issues, or submit pull requests for improvements.
 
 ---
 
-## 👤 Author
+## Author
 
 **Joseph Chege Munga**
+
 Math & CS Graduate | Python, ML, Data Science
+
 GitHub: [@JosephChege4](https://github.com/JosephChege4)
+
 Email: [chegejrmungai@gmail.com](mailto:chegejrmungai@gmail.com)
