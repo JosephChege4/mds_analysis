@@ -1,4 +1,4 @@
-# 🏥 Nursing Facility Risk Assessment & Quality Dashboard
+# Nursing Facility Risk Assessment & Quality Dashboard
 
 ## Overview
 
